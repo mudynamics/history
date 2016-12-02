@@ -22,6 +22,14 @@ const HashPathCoders = {
   slash: {
     encodePath: addLeadingSlash,
     decodePath: addLeadingSlash
+  },
+  hashbangnoslash: {
+    encodePath: (path) => {
+      let encodedPath = path.charAt(0) === '/' ? path.substring(1) : path;
+
+      return encodedPath.charAt(0) === '!' ? encodedPath : '!' + encodedPath;
+    },
+    decodePath: (path) => path.charAt(0) === '!' ? '/' + path.substring(1) : '/' + path
   }
 }
 
